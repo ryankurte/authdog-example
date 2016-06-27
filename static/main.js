@@ -17,6 +17,7 @@ function U2FRegister(tokenName) {
         $.get(paths.u2f.register, {tokenName: tokenName}, requestCallback);
 
         function requestCallback(data) {
+            console.log("Challenge:")
             console.log(data);
             console.log("Waiting for U2F input");
             u2f.register(data.appId, data.registerRequests, data.registeredKeys, registerCallback, 10);
@@ -45,6 +46,7 @@ function U2FRegister(tokenName) {
                 return reject(data.error);
             }
             console.log("U2F enrolment complete");
+            console.log(data);
             resolve(data);
         }
     });
@@ -56,6 +58,8 @@ function U2FSign() {
         $.get(paths.u2f.sign, {}, requestCallback);
 
         function requestCallback(data) {
+            console.log("Challenge:")
+            console.log(data);
             console.log("Waiting for U2F input");
             u2f.sign(data.appId, data.challenge, data.registeredKeys, signatureCallback, 10);
         }
@@ -66,6 +70,8 @@ function U2FSign() {
                     return reject('Timed out waiting for user input');
                 } else if(res.errorCode == u2f.ErrorCodes.BAD_REQUEST) {
                     return reject('Bad U2F Request');
+                } else if(res.errorCode == u2f.ErrorCodes.DEVICE_INELIGIBLE) {
+                    return reject('Device not enrolled');
                 } else {
                     return reject(res.errorCode);
                 }
@@ -81,6 +87,7 @@ function U2FSign() {
                 return reject(data.error);
             }
             console.log("U2F signing complete");
+            console.log(data);
             resolve(data);
         }
     });

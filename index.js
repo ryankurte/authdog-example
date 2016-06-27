@@ -75,7 +75,7 @@ app.post('/register', function(req, res) {
 });
 
 app.get('/sign', function(req, res) {
-    var tokens = req.session.tokens || [];
+    var tokens = req.session.tokens;
 
     u2f.startAuthentication(appId, tokens)
     .then(function(authenticationRequest) {
