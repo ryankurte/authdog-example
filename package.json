@@ -1,0 +1,31 @@
+{
+  "name": "authdog-example",
+  "version": "0.0.1",
+  "description": "Example application using Authdog U2F",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryankurte/authdog-example.git"
+  },
+  "keywords": [
+    "U2F",
+    "AuthDog",
+    "Example",
+    "Fido"
+  ],
+  "author": "Ryan Kurte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryankurte/authdog-example/issues"
+  },
+  "homepage": "https://github.com/ryankurte/authdog-example#readme",
+  "dependencies": {
+    "authdog": "0.0.2",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0"
+  }
+}
