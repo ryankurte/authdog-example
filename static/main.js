@@ -11,6 +11,27 @@ const paths = {
     }
 };
 
+const mockRegister = {
+    appId: "https://localhost:9000",
+    type:"u2f_register_request",
+    registerRequests:[
+    {
+        version:"U2F_V2",
+        challenge:"NJTcQoC7uErFfoNrdWBQXW7jdJpDbVmSDV-UJNxc9IQ="
+    }],
+    registeredKeys:[]
+}
+
+const mockSign = {
+    appId:"https://localhost:9000",
+    type:"u2f_sign_request",
+    challenge:"tZYYAfMkktFK3+nQiY2wqsC6cZzKkisu4rdwNptMmC8=",
+    registeredKeys:[{
+        version:"U2F_V2",
+        keyHandle:"IREtcn_vhz04ZhXHoASHcGHIPUqVMjLheJLb97tlBHkLDUxLE_v7KIMXjKlqbAbKq4LUHbHmp6RCkr2ioCR5yw=="
+    }]
+}   
+
 function U2FRegister(tokenName) {
     return new Promise(function(resolve, reject) {
         console.log("Requesting U2F registration challenge")
@@ -30,9 +51,9 @@ function U2FRegister(tokenName) {
                 } else if(res.errorCode == u2f.ErrorCodes.BAD_REQUEST) {
                     return reject('Bad U2F Request');
                 } else if(res.errorCode == u2f.ErrorCodes.DEVICE_INELIGIBLE) {
-                    return reject('Device already enrolled');
+                    return reject('Device ineligible');
                 } else {
-                    return reject(res.errorCode);
+                    return reject('Unknown error: ' + res.errorCode);
                 }
             }
 
@@ -71,9 +92,9 @@ function U2FSign() {
                 } else if(res.errorCode == u2f.ErrorCodes.BAD_REQUEST) {
                     return reject('Bad U2F Request');
                 } else if(res.errorCode == u2f.ErrorCodes.DEVICE_INELIGIBLE) {
-                    return reject('Device not enrolled');
+                    return reject('Device ineligible');
                 } else {
-                    return reject(res.errorCode);
+                    return reject('Unknown error: ' + res.errorCode);
                 }
             }
 
