@@ -50,10 +50,10 @@ function sign() {
     U2FSign()
     .then(function(res) {
         console.log(res);
-        $('#sign-response').text(err);
+        $('#sign-response').text("Signing OK");
     }, function(err) {
         console.log(err);
-        $('#sign-response').text(err);
+        $('#sign-response').text("Signing error: " + err);
     })
 }
 

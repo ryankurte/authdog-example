@@ -11,35 +11,12 @@ const paths = {
     }
 };
 
-const mockRegister = {
-    appId: "https://localhost:9000",
-    type:"u2f_register_request",
-    registerRequests:[
-    {
-        version:"U2F_V2",
-        challenge:"NJTcQoC7uErFfoNrdWBQXW7jdJpDbVmSDV-UJNxc9IQ="
-    }],
-    registeredKeys:[]
-}
-
-const mockSign = {
-    appId:"https://localhost:9000",
-    type:"u2f_sign_request",
-    challenge:"tZYYAfMkktFK3+nQiY2wqsC6cZzKkisu4rdwNptMmC8=",
-    registeredKeys:[{
-        version:"U2F_V2",
-        keyHandle:"IREtcn_vhz04ZhXHoASHcGHIPUqVMjLheJLb97tlBHkLDUxLE_v7KIMXjKlqbAbKq4LUHbHmp6RCkr2ioCR5yw=="
-    }]
-}   
-
 function U2FRegister(tokenName) {
     return new Promise(function(resolve, reject) {
         console.log("Requesting U2F registration challenge")
         $.get(paths.u2f.register, {tokenName: tokenName}, requestCallback);
 
         function requestCallback(data) {
-            console.log("Challenge:")
-            console.log(data);
             console.log("Waiting for U2F input");
             u2f.register(data.appId, data.registerRequests, data.registeredKeys, registerCallback, 10);
         }
@@ -67,7 +44,6 @@ function U2FRegister(tokenName) {
                 return reject(data.error);
             }
             console.log("U2F enrolment complete");
-            console.log(data);
             resolve(data);
         }
     });
@@ -79,8 +55,6 @@ function U2FSign() {
         $.get(paths.u2f.sign, {}, requestCallback);
 
         function requestCallback(data) {
-            console.log("Challenge:")
-            console.log(data);
             console.log("Waiting for U2F input");
             u2f.sign(data.appId, data.challenge, data.registeredKeys, signatureCallback, 10);
         }
@@ -108,7 +82,6 @@ function U2FSign() {
                 return reject(data.error);
             }
             console.log("U2F signing complete");
-            console.log(data);
             resolve(data);
         }
     });
