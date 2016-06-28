@@ -1,6 +1,6 @@
 # AuthDog Example
 
-A simple example application to demonstrate the use of [AuthDog](ryankurte/authdog) for U2F registration and signing.  
+A simple example application to demonstrate the use of [AuthDog](https://github.com/ryankurte/authdog) for U2F registration and signing.  
 
 All data is stored non-persistently against your session.  
 
