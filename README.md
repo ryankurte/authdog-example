@@ -11,5 +11,5 @@ All data is stored non-persistently against your session.
 3. `npm install` to fetch dependencies
 4. `./gencerts.sh fakeCA fakeName fakeOrg certs/` to generate a self signed tls cert
 5. `node index.js` to run the server
-6. `navigate to `https://localhost:9000` to try out the (terrible) interface
+6. navigate to `https://localhost:9000` to try out the (terrible) interface
 
